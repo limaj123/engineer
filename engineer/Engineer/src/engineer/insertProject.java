@@ -5,17 +5,72 @@
  */
 package engineer;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Jamil
+ * @author Jamil Francisco
  */
-public class insertProject extends javax.swing.JPanel {
+public class insertProject extends javax.swing.JFrame {
 
     /**
      * Creates new form insertProject
      */
     public insertProject() {
         initComponents();
+    }
+
+    public Connection getConnection() {
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost/engineer", "root", "");
+            JOptionPane.showMessageDialog(null, "Connected");
+            return con;
+        } catch (SQLException ex) {
+            Logger.getLogger(addProject.class.getName()).log(Level.SEVERE, null, ex);
+            return con;
+        }
+
+    }
+    
+    public void insertdata() {
+        Connection con = getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO engineer.projects (DOA, date, approval, CIN, NOP, SOF, location, subject, ContractID, DE, ADE, CCS, PE, PI, OC, contractor, CN, CA)" + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps.setString(1, tf1.getText());
+            ps.setString(2, tf2.getText());
+            ps.setString(3, tf3.getText());
+            ps.setString(4, tf4.getText());
+            ps.setString(5, tf5.getText());
+            ps.setString(6, tf6.getText());
+            ps.setString(7, tf7.getText());
+            ps.setString(8, tf8.getText());
+            ps.setString(9, tf9.getText());
+            ps.setString(10, tf10.getText());
+            ps.setString(11, tf11.getText());
+            ps.setString(12, tf12.getText());
+            ps.setString(13, tf13.getText());
+            ps.setString(14, tf14.getText());
+            ps.setString(15, tf15.getText());
+            ps.setString(16, tf16.getText());
+            ps.setString(17, tf17.getText());
+            ps.setString(18, tf18.getText());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Save");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(insertProject.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     /**
@@ -27,19 +82,252 @@ public class insertProject extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        tf17 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        tf1 = new javax.swing.JTextField();
+        tf2 = new javax.swing.JTextField();
+        tf3 = new javax.swing.JTextField();
+        tf4 = new javax.swing.JTextField();
+        tf5 = new javax.swing.JTextField();
+        tf6 = new javax.swing.JTextField();
+        tf7 = new javax.swing.JTextField();
+        tf8 = new javax.swing.JTextField();
+        tf9 = new javax.swing.JTextField();
+        tf10 = new javax.swing.JTextField();
+        tf11 = new javax.swing.JTextField();
+        tf12 = new javax.swing.JTextField();
+        tf13 = new javax.swing.JTextField();
+        tf14 = new javax.swing.JTextField();
+        tf15 = new javax.swing.JTextField();
+        tf16 = new javax.swing.JTextField();
+        tf18 = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(61, 72, 85));
+
+        jPanel1.setBackground(new java.awt.Color(61, 72, 85));
+        jPanel1.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel1.setToolTipText("");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("DELETE");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 120, 40));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Date:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Approval:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Contract I.D. No.:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Name of Project:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Source of fund:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Location:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Contractor Address:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 250, -1, 10));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("District Office Address:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Subject:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 10));
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Contract ID w/ Name:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, 10));
+
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("District Engineer:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, 10));
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("OIC- Assistant District Engineer:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, -1, 20));
+
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Chief, Construction  Section:");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, 20));
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Project Engineer:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, 20));
+
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Project Inspector:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, -1, 40));
+
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Office Code:");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, 20));
+
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Contractor:");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, -1, 20));
+
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Contractor Name:");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, 20));
+        jPanel1.add(tf17, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 140, -1));
+
+        jButton2.setText("ADD");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 120, 40));
+
+        jButton3.setText("UPDATE");
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 120, 40));
+        jPanel1.add(tf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 140, -1));
+        jPanel1.add(tf2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 140, -1));
+        jPanel1.add(tf3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 140, -1));
+        jPanel1.add(tf4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 140, -1));
+        jPanel1.add(tf5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 140, -1));
+        jPanel1.add(tf6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 140, -1));
+        jPanel1.add(tf7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 140, -1));
+        jPanel1.add(tf8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 140, -1));
+        jPanel1.add(tf9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 140, -1));
+        jPanel1.add(tf10, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 140, -1));
+        jPanel1.add(tf11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 140, -1));
+        jPanel1.add(tf12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 140, -1));
+        jPanel1.add(tf13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 140, -1));
+        jPanel1.add(tf14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, 140, -1));
+        jPanel1.add(tf15, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 140, -1));
+        jPanel1.add(tf16, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 140, -1));
+        jPanel1.add(tf18, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 250, 140, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  insertdata();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(insertProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(insertProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(insertProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(insertProject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new insertProject().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField tf1;
+    private javax.swing.JTextField tf10;
+    private javax.swing.JTextField tf11;
+    private javax.swing.JTextField tf12;
+    private javax.swing.JTextField tf13;
+    private javax.swing.JTextField tf14;
+    private javax.swing.JTextField tf15;
+    private javax.swing.JTextField tf16;
+    private javax.swing.JTextField tf17;
+    private javax.swing.JTextField tf18;
+    private javax.swing.JTextField tf2;
+    private javax.swing.JTextField tf3;
+    private javax.swing.JTextField tf4;
+    private javax.swing.JTextField tf5;
+    private javax.swing.JTextField tf6;
+    private javax.swing.JTextField tf7;
+    private javax.swing.JTextField tf8;
+    private javax.swing.JTextField tf9;
     // End of variables declaration//GEN-END:variables
 }

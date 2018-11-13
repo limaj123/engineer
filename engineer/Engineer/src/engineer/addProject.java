@@ -5,6 +5,17 @@
  */
 package engineer;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jamil
@@ -16,8 +27,75 @@ public class addProject extends javax.swing.JInternalFrame {
      */
     public addProject() {
         initComponents();
+        Show_Project();
     }
+public Connection getConnection(){
+    Connection con= null;
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost/engineer","root","");
+            JOptionPane.showMessageDialog(null, "Connected");
+         return con;
+        } catch (SQLException ex) {
+            Logger.getLogger(addProject.class.getName()).log(Level.SEVERE, null, ex);
+             return con;
+        }
+           
+}
 
+   public ArrayList<addProjectclass> getProjectList(){
+         ArrayList<addProjectclass> projectList = new ArrayList<addProjectclass>();
+         Connection con = getConnection();
+     String query = "SELECT * FROM projects";
+     Statement st;
+     ResultSet rs;
+     
+     
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            addProjectclass addprojectclass;
+            
+            while(rs.next()){
+               addprojectclass = new addProjectclass(rs.getInt("id"), rs.getString("DOA"), rs.getString("date"),rs.getString("approval"),rs.getString("CIN"), rs.getString("NOP"), rs.getString("SOF"),rs.getString("location"), rs.getString("subject"), rs.getString("ContractID"), rs.getString("DE") ,rs.getString("ADE"),rs.getString("CCS"),rs.getString("PE"),rs.getString("PI"), rs.getString("OC"), rs.getString("contractor"), rs.getString("CN"),rs.getString("CA"));
+               projectList.add(addprojectclass);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(insertProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+     return projectList;
+        }
+        
+        public void Show_Project(){
+            ArrayList<addProjectclass> list = getProjectList();
+            DefaultTableModel model  = (DefaultTableModel)jTable1.getModel();
+            
+            Object[] row = new Object[18];
+            for(int i=0; i < list.size(); i++)
+            {
+                row[0] = list.get(i).getId();
+                row[1] = list.get(i).getDOA();
+                row[2] = list.get(i).getDate();
+                row[3] = list.get(i).getApproval();
+                row[4] = list.get(i).getCIN();
+                row[5] = list.get(i).getNOP();
+                row[6] = list.get(i).getSOF();
+                row[7] = list.get(i).getLocation();
+                row[8] = list.get(i).getSubject();
+                row[9] = list.get(i).getContractID();
+                row[10] = list.get(i).getDE();
+                row[11] = list.get(i).getADE();
+                row[12] = list.get(i).getCCS();
+                row[13] = list.get(i).getPE();
+                row[14] = list.get(i).getPI();
+                row[15] = list.get(i).getOC();
+                row[16] = list.get(i).getContractor();
+                row[17] = list.get(i).getCN();
+                
+                model.addRow(row);
+            }
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +121,11 @@ public class addProject extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_Add_50px.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -67,18 +150,21 @@ public class addProject extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 850, 60));
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "District Office Address", "Date", "Approval", "Contract I.D. No.", "Name of Project", "Source of fund", "Location", "Subject", "Contract ID w/ Name", "District Engineer", "OIC- Assistant District Engineer", "Chief, Construction  Section", "Project Engineer", "Project Inspector", "Office Code", "Contractor ", "Contractor Name", "Contractor Address"
             }
         ));
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable1.setAutoscrolls(false);
         jTable1.setGridColor(new java.awt.Color(0, 0, 0));
+        jTable1.setPreferredSize(new java.awt.Dimension(2500, 64));
         jTable1.setSelectionBackground(new java.awt.Color(61, 72, 85));
         jScrollPane1.setViewportView(jTable1);
         jTable1.getAccessibleContext().setAccessibleDescription("");
@@ -90,7 +176,7 @@ public class addProject extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,6 +185,10 @@ public class addProject extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+       new insertProject().setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
